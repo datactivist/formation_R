@@ -120,24 +120,3 @@ ggplot(mediatheques,
 
 
 
-
-#---- Exercice final
-
-
-# Tableau
-table_stat <- mediatheques %>% filter(annee_publication == "2019" | annee_publication == "2020" | annee_publication == "2021") %>% 
-    group_by(libelle_support) %>% 
-    summarise(nb_prets_total = sum(nb_prets)) %>% 
-    filter(nb_prets_total != 0)
-
-# Graphique
-table_stat %>% mutate(libelle_support = reorder(libelle_support, nb_prets_total, desc = T)) %>% 
-    ggplot(aes(x = libelle_support, y = nb_prets_total)) +
-        geom_col(fill = "#0066CC", col = "black") +
-        labs(title = "Support des ouvrages prêtés entre 2019 et 2021", 
-             subtitle = "Médiathèques de Lille, Lomme et Hellemmes", 
-             x = "Support de l'ouvrage",
-             y = "Nombre de prêts total") +
-        #coord_flip() +
-        theme_classic()
-
