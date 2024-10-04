@@ -16,8 +16,4 @@ data <- data |> rename(annee_naissance = `Année de naissance`,
                    	   nom_departement = `Nom Officiel Département`,
                    	   nb_naissances = `Nombre de naissances`)
 
-# Sélection
-dat_select1 <- data |> select(-c(annee_naissance, `Année triable`))
-dat_select2 <- data |> select(Sexe:nb_naissances)
-dat_relocate1 <- data |> relocate(code_departement)
-dat_select3 <- data |> select(code_departement, 1:3, 5:9)
+
