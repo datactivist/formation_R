@@ -21,3 +21,10 @@ dat_select1 <- data |> select(-c(annee_naissance, `Année triable`))
 dat_select2 <- data |> select(Sexe:nb_naissances)
 dat_relocate1 <- data |> relocate(code_departement)
 dat_select3 <- data |> select(code_departement, 1:3, 5:9)
+
+# Filtrer
+dat_filter1 <- data |> filter(Sexe == "Féminin")
+dat_filter2 <- data |> filter(nom_departement == "Aisne" | nom_departement == "Gironde")
+data |> filter(nb_naissances >= 100 & `Nom Officiel Région` == "Occitanie") |> nrow()
+
+
