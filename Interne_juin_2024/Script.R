@@ -27,4 +27,9 @@ dat_filter1 <- data |> filter(Sexe == "Féminin")
 dat_filter2 <- data |> filter(nom_departement == "Aisne" | nom_departement == "Gironde")
 data |> filter(nb_naissances >= 100 & `Nom Officiel Région` == "Occitanie") |> nrow()
 
-
+# Créer
+data2 <- data |> mutate(nb_naissances10 = nb_naissances * 10,
+                        taux = nb_naissances / sum(nb_naissances) *100,
+                        siecle = substr(`Année triable`, 1, 2),
+                        siecle = as.numeric(siecle) + 1,
+                        region_1 = word(`Nom Officiel Région`, 1))
