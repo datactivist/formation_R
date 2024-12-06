@@ -31,5 +31,15 @@ data |> filter(nb_naissances >= 100 & `Nom Officiel Région` == "Occitanie") |> 
 data2 <- data |> mutate(nb_naissances10 = nb_naissances * 10,
                         taux = nb_naissances / sum(nb_naissances) *100,
                         siecle = substr(`Année triable`, 1, 2),
-                        siecle = as.numeric(siecle) + 1,
-                        region_1 = word(`Nom Officiel Région`, 1))
+                        siecle = as.numeric(siecle) + 1)
+    #exos en plus créer
+data <- data |> mutate(region_1 = word(`Nom Officiel Région`, 1))
+data <- data |> mutate(new_col = str_replace_all(Sexe, c("Masculin" = "Hommme", "Féminin" ~ "Femme")))
+data <- data |> mutate(nouvelle_colonne = case_when(Sexe == "Masculin" ~ "Hommme",
+                                                    Sexe == "Féminin" ~ "Femme",
+                                                    .default = NA_character_))
+
+# Résumer
+data |> summarise(moy = mean(nb_naissances),
+                  med = median(nb_naissances))
+data |> summarise(etendue = range(nb_naissances))
