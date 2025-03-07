@@ -17,3 +17,15 @@ data |>
     filter((`Présence de douches` == TRUE & `Présence de sanitaires` == TRUE) | `Aménagements de confort` == TRUE) |> 
     nrow() #10.225
 
+# Question 4
+table <- data |> 
+    summarise(min_annee = min(`Année de mise en service`, na.rm = TRUE), .by = `Département Nom`) |> 
+    arrange(min_annee) #Savoie
+
+# Question 5
+table <- data |> 
+    filter(`Commune Nom` == "Nantes" | `Commune Nom` == "Bordeaux") |> 
+    summarise(`Nombre d'équipements` = n(), .by = c(`Equipement d'accès libre`, `Commune Nom`)) |> 
+    mutate(`%` = round(`Nombre d'équipements`/sum(`Nombre d'équipements`)*100, 0), .by = `Commune Nom`) |> 
+    relocate(`Commune Nom`, .before = `Nombre d'équipements`)
+
