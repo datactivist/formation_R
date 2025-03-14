@@ -29,3 +29,12 @@ table <- data |>
     mutate(`%` = round(`Nombre d'équipements`/sum(`Nombre d'équipements`)*100, 0), .by = `Commune Nom`) |> 
     relocate(`Commune Nom`, .before = `Nombre d'équipements`)
 
+
+#--- Graphique
+
+# Data
+ggplot(table, aes(x = `Commune Nom`, y = `Nombre d'équipements`)) +
+    geom_col()
+
+
+
